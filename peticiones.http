@@ -1,0 +1,178 @@
+http://localhost:3500/api/v1/auth
+http://saint-node-server.herokuapp/auth/register
+
+### register a new user 
+POST http://localhost:3500/api/v1/auth/register
+Content-Type: application/json
+
+{"name": "viejo", "email": "viejo@correo.com", "password": "111"}
+
+### login 
+POST http://localhost:3500/api/v1/auth/login
+Content-Type: application/json
+
+{"email": "pedro@correo.com", "password": "111"}
+
+### Verify 
+GET http://localhost:3500/api/v1/auth/is-verify
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTQ0ODE3NzAsImV4cCI6MTYxNDQ4NTM3MH0.jT-DsLaXylBErydumXMuEZ1eMauYxNzS8qrJ7-ZPQt8
+Content-Type: application/json
+
+
+#=============================================================
+
+### Homepage
+GET http://localhost:3500/api/v1/dashboard
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicGVkcm9AY29ycmVvLmNvbSIsImlhdCI6MTYxNDQ4NTY2MiwiZXhwIjoxNjE0NDg5MjYyfQ.ipikGdHLKHZ5xIm4LJ_QV1GOW4n8dmaa_pbv4sYh3Lk
+Content-Type: application/json
+
+#=============================================================
+
+### invoices
+POST http://localhost:3500/invoices
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoicGVkcm9AY29ycmVvLmNvbSIsImlhdCI6MTYxMjk3NjU2NywiZXhwIjoxNjEyOTgwMTY3fQ.sRhGyrnTI7XF_U9nDW5N6gmn5Uzwfe1Wp0FFt9IV084
+Content-Type: application/json
+
+{"user_id": 1}
+
+#=============================================================
+### All Products
+GET http://localhost:3500/api/v1/products/
+Content-Type: application/json
+
+### Product by Id
+GET http://localhost:3500/api/v1/products/4
+Content-Type: application/json
+
+### create product
+POST http://localhost:3500/api/v1/products/
+Content-Type: application/json
+
+    {
+        "code": "ABCDE",
+        "brand": "Hasbro",
+        "category": "Boys",
+        "description": "Iron Man 12' con sonidos",
+        "inventory": 100, 
+        "price": 19.99,
+        "pack": 12
+    }
+
+### update product
+PUT http://localhost:3500/api/v1/products/4
+Content-Type: application/json
+
+    {
+        "code": "12345",
+        "brand": "Mattel",
+        "category": "Boys",
+        "description": "pista con sonidos",
+        "inventory": 100, 
+        "price": 19.99,
+        "pack": 3
+    }
+
+### delete product
+DELETE http://localhost:3500/api/v1/products/7
+Content-Type: application/json
+
+
+### add images of a product
+POST http://localhost:3500/api/v1/products/6/image
+Content-Type: application/json
+
+    {
+        "image_id": "hjymsk7zlvjnysn8zjup",
+        "main": "NO"
+    }
+
+
+
+### ================== ORDERS ==============================
+
+### Get all Orders -- > summary [one line per order] 
+GET http://localhost:3500/api/v1/orders/
+Content-Type: application/json
+
+
+### Get order by Id -- > order detail at order id submit
+GET http://localhost:3500/api/v1/orders/1
+Content-Type: application/json
+
+
+### Get order by Id Summary -- > summary of and particular order [one line]
+GET http://localhost:3500/api/v1/orders/2/header
+Content-Type: application/json
+
+
+### Delete order by Id (Delete details and main information of a order)
+DELETE http://localhost:3500/api/v1/orders/3/orderDelete
+Content-Type: application/json
+
+
+### Get all products join with orders of a customer
+GET http://localhost:3500/api/v1/products/2/ordersGet
+Content-Type: application/json
+
+### Create a orders for a user
+POST http://localhost:3500/api/v1/products/2/ordersCreate
+Content-Type: application/json
+
+    {
+        "orderbody" :[
+        {"product_id": 1, "product_price": 11, "amount": 111},
+        {"product_id": 2, "product_price": 22, "amount": 222},
+        {"product_id": 3, "product_price": 33, "amount": 333},
+        {"product_id": 4, "product_price": 44, "amount": 444},
+        {"product_id": 5, "product_price": 55, "amount": 555},
+        {"product_id": 6, "product_price": 66, "amount": 666}
+        ]
+
+    }
+
+
+### Confirm orders
+PUT http://localhost:3500/api/v1/products/1/ordersConfirm
+Content-Type: application/json
+
+    {
+        "order_id": 4,
+        "user_id": 2
+    }
+
+
+
+#================================================================
+### usuarios
+POST http://localhost:4500/create
+Content-Type: application/json
+
+
+### usuarios
+POST http://localhost:4500/login
+Content-Type: application/json
+
+    {
+        "email": "billy@example.com",
+        "password": "passaword1"
+    }
+
+### recibos
+POST http://localhost:4500/api/v1/recibos/
+Content-Type: application/json
+
+    {
+        "user_id": 1,
+        "email": "billy@example.com",
+        "password": "passaword1"
+    }
+
+### cobros
+POST http://localhost:4500/api/v1/recibos/stripe/
+Content-Type: application/json
+
+    {
+        "user_id": 1,
+        "email": "billy@example.com",
+        "password": "passaword1"
+    }
